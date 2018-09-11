@@ -29,6 +29,9 @@
       "airbnb-base",
       "prettier"
     ],
+    "rules": {
+      "import/no-dynamic-require": 0
+    },
     "env": {
       "node": true
     }
@@ -38,7 +41,10 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
-    "rimraf": "^2.6.2"
+    "pg": "^7.4.3",
+    "rimraf": "^2.6.2",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
   },
   "babel": {
     "presets": [

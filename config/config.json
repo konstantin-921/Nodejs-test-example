@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "nodejs",
+    "password": 1111,
+    "database": "migration_development",
+    "host": "localhost",
+    "dialect": "postgres",
+    "timestamps": false
+  },
+  "test": {
+    "username": "nodejs",
+    "password": 1111,
+    "database": "migration_test",
+    "host": "localhost",
+    "dialect": "postgres",
+    "timestamps": false
+  },
+  "production": {
+    "username": "nodejs",
+    "password": 1111,
+    "database": "migration_production",
+    "host": "localhost",
+    "dialect": "postgres",
+    "timestamps": false
+  }
+}
