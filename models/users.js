@@ -2,10 +2,14 @@ module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
     "Users",
     {
-      age: DataTypes.STRING
+      name: DataTypes.STRING,
+      login: DataTypes.STRING,
+      password: DataTypes.STRING
     },
     {}
   );
-  Users.associate = function() {};
+  Users.associate = db => {
+    Users.hasMany(db.Boards);
+  };
   return Users;
 };
