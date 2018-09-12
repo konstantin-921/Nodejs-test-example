@@ -19,11 +19,7 @@
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.14.0",
     "lint-staged": "^7.2.2",
-    "pre-commit": "^1.2.2",
-    "check-node-version": "10.0.0"
-  },
-  "engines": {
-    "node": "10.0.0"
+    "pre-commit": "^1.2.2"
   },
   "lint-staged": {
     "*.js": "eslint"
