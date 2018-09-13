@@ -2,15 +2,11 @@ module.exports = (sequelize, DataTypes) => {
   const Boards = sequelize.define(
     "Boards",
     {
-      name: DataTypes.STRING,
-      login: DataTypes.STRING,
-      password: DataTypes.STRING,
-      user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "Users",
-          key: "id"
-        }
+      title: {
+        type: DataTypes.STRING
+      },
+      share: {
+        type: DataTypes.BOOLEAN
       }
     },
     {}

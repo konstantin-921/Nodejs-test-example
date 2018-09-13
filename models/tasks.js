@@ -5,14 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       title: DataTypes.STRING,
       content: DataTypes.STRING,
       status: DataTypes.STRING,
-      position: DataTypes.INTEGER,
-      column_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "Columns",
-          key: "id"
-        }
-      }
+      position: DataTypes.INTEGER
     },
     {}
   );

@@ -7,18 +7,25 @@
   "license": "MIT",
   "scripts": {
     "start": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create",
+    "start-test": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create-test",
     "dev": "node dev.js",
+    "test": "NODE_ENV=test && nyc report && ./node_modules/.bin/mocha --compilers js:babel-core/register tests -w --recursive",
     "lint:js": "eslint ./src",
     "lint-staged": "lint-staged",
-    "db-create": "node_modules/.bin/sequelize db:create migration_development && node_modules/.bin/sequelize db:migrate"
+    "db-create": "node_modules/.bin/sequelize db:create && node_modules/.bin/sequelize db:migrate",
+    "db-create-test": "node_modules/.bin/sequelize db:create --env test && node_modules/.bin/sequelize db:migrate --env test"
   },
   "devDependencies": {
     "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.14.0",
     "lint-staged": "^7.2.2",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "pg-native": "^3.0.0",
     "pre-commit": "^1.2.2"
   },
   "lint-staged": {
