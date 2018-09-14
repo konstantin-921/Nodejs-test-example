@@ -6,8 +6,8 @@
   "author": "Kostya Podlesny",
   "license": "MIT",
   "scripts": {
-    "start": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create",
-    "start-test": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create-test",
+    "start": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && npm run db-create",
+    "start-test": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && npm run db-create-test",
     "dev": "node dev.js",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register tests -w --recursive",
     "lint:js": "eslint ./src",
@@ -24,9 +24,11 @@
     "eslint-plugin-import": "^2.14.0",
     "lint-staged": "^7.2.2",
     "mocha": "^5.2.0",
+    "node-mocks-http": "^1.7.0",
     "nyc": "^13.0.1",
     "pg-native": "^3.0.0",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "supertest": "^3.3.0"
   },
   "lint-staged": {
     "*.js": "eslint"
@@ -38,7 +40,13 @@
       "prettier"
     ],
     "rules": {
-      "import/no-dynamic-require": 0
+      "import/no-dynamic-require": 0,
+      "no-param-reassign": [
+        2,
+        {
+          "props": false
+        }
+      ]
     },
     "env": {
       "node": true
@@ -46,13 +54,23 @@
   },
   "pre-commit": "lint-staged",
   "dependencies": {
+    "assert": "^1.4.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "chai-http": "^4.2.0",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
     "pg": "^7.4.3",
     "rimraf": "^2.6.2",
     "sequelize": "^4.38.0",
-    "sequelize-cli": "^4.1.1"
+    "sequelize-cli": "^4.1.1",
+    "should": "^13.2.3"
   },
   "babel": {
     "presets": [

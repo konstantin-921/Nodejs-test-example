@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for models/index.js</title>
+    <title>Code coverage report for Test  example/app.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">All files</a> / <a href="index.html">models</a> index.js
+      <a href="../index.html">All files</a> / <a href="index.html">Test  example</a> app.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">90% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/12</span>
+        <span class='fraction'>18/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>3/6</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>1/1</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">91.67% </span>
+        <span class="strong">90% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>11/12</span>
+        <span class='fraction'>18/20</span>
       </div>
     </div>
     <p class="quiet">
@@ -80,81 +80,84 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">39x</span>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">156x</span>
-<span class="cline-any cline-yes">156x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-yes">39x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Sequelize = require("sequelize");
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import passport from "passport";
+import auth from "./route/auth";
+import users from "./route/users";
 &nbsp;
-const env = process.env.NODE_ENV || <span class="branch-1 cbranch-no" title="branch not covered" >"development";</span>
-const config = require(`${__dirname} /../config/config.json`)[env];
+const app = express();
 &nbsp;
-let sequelize;
-<span class="missing-if-branch" title="if path not taken" >I</span>if (config.use_env_variable) {
-<span class="cstat-no" title="statement not covered" >  sequelize = new Sequelize(process.env[config.use_env_variable], config);</span>
-} else {
-  sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
-}
+// const verifytoken = require('./services/verifytoken');
 &nbsp;
-const db = {
-  Users: sequelize.import("./users"),
-  Boards: sequelize.import("./boards"),
-  Columns: sequelize.import("./columns"),
-  Tasks: sequelize.import("./tasks")
-};
+app.use(cors());
+// app.use(verifytoken);
+app.use(passport.initialize());
+app.use(express.static(`${__dirname}/public`));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 &nbsp;
-Object.keys(db).forEach(modelName =&gt; {
-  <span class="missing-if-branch" title="else path not taken" >E</span>if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
+app.use(auth);
+app.use(users);
+&nbsp;
+app.use(<span class="fstat-no" title="function not covered" >(e</span>rror, req, res) =&gt; {
+<span class="cstat-no" title="statement not covered" >  res.status(error.status || 500);</span>
+<span class="cstat-no" title="statement not covered" >  res.json({</span>
+    error: {
+      message: error.message
+    }
+  });
 });
 &nbsp;
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+const server = app.listen(3000, () =&gt; {
+  console.log("Example app listening on port 3000!");
+});
 &nbsp;
-export default db;
+module.exports = server;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 14 2018 17:53:41 GMT+0300 (MSK)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Sep 14 2018 16:46:42 GMT+0300 (MSK)
 </div>
 </div>
 <script src="../prettify.js"></script>
