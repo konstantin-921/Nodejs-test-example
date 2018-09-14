@@ -38,4 +38,39 @@ describe("company model", () => {
     });
     expect(data).to.equal(false);
   });
+  it("User should wrong data type in login", done => {
+    db.Users.create({
+      login: 1,
+      email: "1@gmail",
+      password: "1",
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    })
+      .then(() => {
+        expect.fail();
+        done();
+      })
+      .catch(err => {
+        expect(err.name).to.be.equal("SequelizeValidationError");
+        done();
+      });
+  });
+
+  it("User should void in login", done => {
+    db.Users.create({
+      login: null,
+      email: "1@gmail",
+      password: "1",
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    })
+      .then(() => {
+        expect.fail();
+        done();
+      })
+      .catch(err => {
+        expect(err.name).to.be.equal("SequelizeValidationError");
+        done();
+      });
+  });
 });

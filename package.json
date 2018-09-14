@@ -9,7 +9,7 @@
     "start": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create",
     "start-test": "rimraf ./dist && babel -d ./dist ./src -s && node ./dist/main.js && yarn run db-create-test",
     "dev": "node dev.js",
-    "test": "NODE_ENV=test && nyc report && ./node_modules/.bin/mocha --compilers js:babel-core/register tests -w --recursive",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --compilers js:babel-core/register tests -w --recursive",
     "lint:js": "eslint ./src",
     "lint-staged": "lint-staged",
     "db-create": "node_modules/.bin/sequelize db:create && node_modules/.bin/sequelize db:migrate",
