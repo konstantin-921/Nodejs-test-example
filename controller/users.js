@@ -1,16 +1,14 @@
 import models from "../models/index";
 
 function oneUser(req, res, next) {
-  console.log("-------request--------", req);
-  return models.Users.findAll({
+  models.Users.findAll({
     where: {
-      login: req.body.login
+      id: req.params.id
     },
     raw: true
   })
-    .then(() => {
-      console.log("Oops");
-      return res.status(200).send("users");
+    .then((users) => {
+      res.status(200).send(users);
     })
     .catch(error => {
       next(error);

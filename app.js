@@ -28,8 +28,8 @@ app.use((error, req, res) => {
   });
 });
 
-const server = app.listen(3000, () => {
+app.listen(3000, () => {
   console.log("Example app listening on port 3000!");
 });
 
-module.exports = server;
+export default app;

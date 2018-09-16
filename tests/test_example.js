@@ -31,11 +31,7 @@
 //     const data = await db.Boards.create({
 //       title: "34",
 //       share: true
-//     }).then(boards => {
-//       return user.hasBoards(boards).then(result => {
-//         return result;
-//       });
-//     });
+//     }).then(boards => user.hasBoards(boards).then(result => result));
 //     expect(data).to.equal(false);
 //   });
 //   it("User should wrong data type in login", done => {
