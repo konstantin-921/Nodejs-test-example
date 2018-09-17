@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 process.env.NODE_ENV = "test";
 
-describe("Auth", () => {
+describe("---Test auth route---", () => {
   it("it should POST /api/auth/signUp", done => {
     const user = {
       login: "Vova",
@@ -32,11 +32,8 @@ describe("Auth", () => {
       .request(server)
       .get("/api/auth/signIn?login=Vova&password=1")
       .end((err, res) => {
-        // console.log("====================================");
-        // console.log(res.body);
-        // console.log("====================================");
         res.should.have.status(200);
-        // res.body[0].should.have.property("password");
+        res.body.should.have.property("token");
         server.close();
         done();
       });

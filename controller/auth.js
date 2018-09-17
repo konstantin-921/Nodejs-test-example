@@ -13,18 +13,12 @@ function login(req, res, next) {
     .then(users => {
       const user = users;
       const hash = bcrypt.compareSync(req.query.password, user.password);
-      console.log("====================================");
-      console.log(hash);
-      console.log("====================================");
       if (hash && user.login === req.query.login) {
         const payload = { user: user.id };
-        const token = jwt.sign(payload, config.secretOrKey, {
+        const token = jwt.sign(payload, "tasmanianDevil", {
           expiresIn: "7d"
         });
-        // console.log("====================================");
-        // console.log(user);
-        // console.log("====================================");
-        res.status(200).json({ message: "ok", token, userId: user.id });
+        res.status(200).send({ message: "ok", token, userId: user.id });
       } else {
         res.status(401).send({ error: { message: "Password is incorrect" } });
       }
