@@ -9,32 +9,34 @@ chai.use(chaiHttp);
 
 process.env.NODE_ENV = "test";
 
-describe("Users", () => {
-  it("it should GET /api/user/:id ", done => {
-    const user = { id: 1 };
+describe("Auth", () => {
+  it("it should POST /api/auth/signUp", done => {
+    const user = {
+      login: "Vova",
+      password: "1",
+      email: "vova@yandex.ru"
+    };
     chai
       .request(server)
-      .get(`/api/user/${user.id}`)
+      .post(`/api/auth/signUp`)
+      .send(user)
       .end((err, res) => {
-        // console.log("====================================");
-        // console.log(res.body);
-        // console.log("====================================");
         res.should.have.status(200);
-        res.body[0].should.have.property("login");
+        res.body.should.have.property("message");
         server.close();
         done();
       });
   });
-  it("it should GET /api/user", done => {
+  it("it should GET /api/auth/signIn", done => {
     chai
       .request(server)
-      .get(`/api/user`)
+      .get("/api/auth/signIn?login=Vova&password=1")
       .end((err, res) => {
         // console.log("====================================");
         // console.log(res.body);
         // console.log("====================================");
         res.should.have.status(200);
-        res.body[0].should.have.property("password");
+        // res.body[0].should.have.property("password");
         server.close();
         done();
       });

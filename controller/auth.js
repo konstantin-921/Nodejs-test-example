@@ -7,18 +7,24 @@ import strategy from "../services/strategy";
 function login(req, res, next) {
   models.Users.findOne({
     where: {
-      name: req.query.username
+      login: req.query.login
     }
   })
     .then(users => {
       const user = users;
-      const hash = bcrypt.compareSync(req.query.userpass, user.password);
-      if (hash && user.name === req.query.username) {
+      const hash = bcrypt.compareSync(req.query.password, user.password);
+      console.log("====================================");
+      console.log(hash);
+      console.log("====================================");
+      if (hash && user.login === req.query.login) {
         const payload = { user: user.id };
         const token = jwt.sign(payload, config.secretOrKey, {
           expiresIn: "7d"
         });
-        res.json({ message: "ok", token, userId: user.id });
+        // console.log("====================================");
+        // console.log(user);
+        // console.log("====================================");
+        res.status(200).json({ message: "ok", token, userId: user.id });
       } else {
         res.status(401).send({ error: { message: "Password is incorrect" } });
       }
@@ -31,29 +37,35 @@ function login(req, res, next) {
 }
 
 function addUser(req, res, next) {
-  const passwordFromUser = req.body.userpass;
+  const passwordFromUser = req.body.password;
   const salt = bcrypt.genSaltSync(10);
   const passwordToSave = bcrypt.hashSync(passwordFromUser, salt);
-  req.body.userpass = passwordToSave;
+  req.body.password = passwordToSave;
 
   models.Users.findOne({
-    where: { name: `${req.body.username}` }
+    where: { login: req.body.login }
   })
     .then(users => {
       if (!users) {
         models.Users.create({
-          password: req.body.userpass,
-          name: req.body.username,
-          email: req.body.useremail
+          login: req.body.login,
+          password: req.body.password,
+          email: req.body.email,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
         })
           .then(() => {
-            res.json({ message: "Successful registration!" });
+            res.status(200).json({
+              message: `User ${req.body.login} successful registration!`
+            });
           })
           .catch(error => {
             next(error);
           });
       } else {
-        res.json({ message: "This user already exists" });
+        res
+          .status(200)
+          .json({ message: `User ${req.body.login} already exists` });
       }
     })
     .catch(error => {

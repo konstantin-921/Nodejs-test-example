@@ -4,9 +4,9 @@ import { login, addUser, secret } from "../controller/auth";
 
 const router = express.Router();
 
-router.post("/api/auth", addUser);
+router.post("/api/auth/signUp", addUser);
 
-router.get("/api/auth", login);
+router.get("/api/auth/signIn", login);
 
 router.post(
   "/api/auth/secret",

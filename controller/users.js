@@ -7,7 +7,7 @@ function oneUser(req, res, next) {
     },
     raw: true
   })
-    .then((users) => {
+    .then(users => {
       res.status(200).send(users);
     })
     .catch(error => {
@@ -17,11 +17,10 @@ function oneUser(req, res, next) {
 
 function allUsers(req, res, next) {
   models.Users.findAll({
-    attributes: ["login", "id"],
     raw: true
   })
     .then(users => {
-      res.json({ users });
+      res.status(200).send(users);
     })
     .catch(error => {
       next(error);
