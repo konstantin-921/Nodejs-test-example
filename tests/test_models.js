@@ -2,8 +2,10 @@ import { expect } from "chai";
 
 import models from "../models/index";
 
+// eslint-disable-next-line no-undef
 describe("---Test model---", () => {
   let user;
+  // eslint-disable-next-line no-undef
   beforeEach(done => {
     models.sequelize
       .sync({ force: true })
@@ -20,6 +22,7 @@ describe("---Test model---", () => {
         done(error);
       });
   });
+  // eslint-disable-next-line no-undef
   it("should have users", async () => {
     const users = await models.Users.findOne({
       row: true,
@@ -27,6 +30,7 @@ describe("---Test model---", () => {
     });
     expect(users.login).to.equal("sam");
   });
+  // eslint-disable-next-line no-undef
   it("have users association", async () => {
     const data = await models.Boards.create({
       title: "34",
@@ -34,6 +38,7 @@ describe("---Test model---", () => {
     }).then(boards => user.hasBoards(boards).then(result => result));
     expect(data).to.equal(false);
   });
+  // eslint-disable-next-line no-undef
   it("User should wrong data type in login", done => {
     models.Users.create({
       login: 1,
@@ -52,6 +57,7 @@ describe("---Test model---", () => {
       });
   });
 
+  // eslint-disable-next-line no-undef
   it("User should void in login", done => {
     models.Users.create({
       login: null,

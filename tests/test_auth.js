@@ -1,6 +1,5 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
-import models from "../models/index";
 import server from "../app";
 
 const should = chai.should();
@@ -9,7 +8,9 @@ chai.use(chaiHttp);
 
 process.env.NODE_ENV = "test";
 
+// eslint-disable-next-line no-undef
 describe("---Test auth route---", () => {
+  // eslint-disable-next-line no-undef
   it("it should POST /api/auth/signUp", done => {
     const user = {
       login: "Vova",
@@ -27,6 +28,7 @@ describe("---Test auth route---", () => {
         done();
       });
   });
+  // eslint-disable-next-line no-undef
   it("it should GET /api/auth/signIn", done => {
     chai
       .request(server)
