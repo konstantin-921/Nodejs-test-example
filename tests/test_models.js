@@ -23,22 +23,6 @@ describe("---Test model---", () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it("should have users", async () => {
-    const users = await models.Users.findOne({
-      row: true,
-      where: { login: "sam" }
-    });
-    expect(users.login).to.equal("sam");
-  });
-  // eslint-disable-next-line no-undef
-  it("have users association", async () => {
-    const data = await models.Boards.create({
-      title: "34",
-      share: true
-    }).then(boards => user.hasBoards(boards).then(result => result));
-    expect(data).to.equal(false);
-  });
-  // eslint-disable-next-line no-undef
   it("User should wrong data type in login", done => {
     models.Users.create({
       login: 1,

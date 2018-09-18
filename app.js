@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import passport from "passport";
 import auth from "./route/auth";
 import users from "./route/users";
+import boards from "./route/boards";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 app.use(auth);
 app.use(users);
+app.use(boards);
 
 app.use((error, req, res) => {
   res.status(error.status || 500);

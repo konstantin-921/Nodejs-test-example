@@ -19,7 +19,8 @@ const db = {
   Users: sequelize.import("./users"),
   Boards: sequelize.import("./boards"),
   Columns: sequelize.import("./columns"),
-  Tasks: sequelize.import("./tasks")
+  Tasks: sequelize.import("./tasks"),
+  Shares: sequelize.import("./share")
 };
 
 Object.keys(db).forEach(modelName => {

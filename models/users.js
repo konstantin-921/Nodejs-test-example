@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Users.associate = db => {
-    Users.hasMany(db.Boards);
+    // Users.hasMany(db.Boards);
+    Users.belongsToMany(db.Boards, { through: "Shares" });
   };
   return Users;
 };

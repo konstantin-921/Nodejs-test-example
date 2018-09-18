@@ -3,8 +3,8 @@ import { allUsers, oneUser } from "../controller/users";
 
 const router = express.Router();
 
-router.get("/api/user", allUsers);
+router.get("/api/users", allUsers);
 
-router.get("/api/user/:id", oneUser);
+router.get("/api/users/:id", oneUser);
 
 export default router;

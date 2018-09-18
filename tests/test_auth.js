@@ -22,7 +22,7 @@ describe("---Test auth route---", () => {
       .post(`/api/auth/signUp`)
       .send(user)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201);
         res.body.should.have.property("message");
         server.close();
         done();

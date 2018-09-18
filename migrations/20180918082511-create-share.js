@@ -1,24 +1,27 @@
 module.exports = {
-  up: (queryInterface, Sequelize) =>
-    queryInterface.createTable("Boards", {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable("Shares", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
-      },
       users_id: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: "Users",
           key: "id"
         }
       },
-      share: {
-        type: Sequelize.BOOLEAN
+      boards_id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+          model: "Boards",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +31,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    }),
-  down: queryInterface => queryInterface.dropTable("Boards")
+    });
+  },
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable("Shares");
+  }
 };

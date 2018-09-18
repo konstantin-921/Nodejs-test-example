@@ -48,7 +48,7 @@ function addUser(req, res, next) {
           updatedAt: Date.now()
         })
           .then(() => {
-            res.status(200).json({
+            res.status(201).json({
               message: `User ${req.body.login} successful registration!`
             });
           })
@@ -57,7 +57,7 @@ function addUser(req, res, next) {
           });
       } else {
         res
-          .status(200)
+          .status(409)
           .json({ message: `User ${req.body.login} already exists` });
       }
     })
