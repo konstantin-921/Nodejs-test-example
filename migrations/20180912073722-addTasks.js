@@ -11,7 +11,7 @@ module.exports = {
       content: Sequelize.STRING,
       status: Sequelize.STRING,
       position: Sequelize.INTEGER,
-      column_id: {
+      columns_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "Columns",
