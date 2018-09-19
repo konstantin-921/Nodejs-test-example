@@ -22,10 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Users.associate = db => {
+    Users.hasMany(db.Boards, { foreignKey: "users_id" });
     Users.belongsToMany(db.Boards, {
       through: db.Shares,
       foreignKey: "users_id",
-      as: "shares"
+      as: "Share"
     });
   };
   return Users;

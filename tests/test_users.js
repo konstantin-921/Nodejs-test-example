@@ -1,38 +1,38 @@
-import chai from "chai";
-import chaiHttp from "chai-http";
-import server from "../app";
+// import chai from "chai";
+// import chaiHttp from "chai-http";
+// import server from "../app";
 
-const should = chai.should();
+// const should = chai.should();
 
-chai.use(chaiHttp);
+// chai.use(chaiHttp);
 
-process.env.NODE_ENV = "test";
+// process.env.NODE_ENV = "test";
 
-// eslint-disable-next-line no-undef
-describe("---Test users route---", () => {
-  // eslint-disable-next-line no-undef
-  it("it should GET /api/users/:id ", done => {
-    const user = { id: 1 };
-    chai
-      .request(server)
-      .get(`/api/users/${user.id}`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.have.property("login");
-        server.close();
-        done();
-      });
-  });
-  // eslint-disable-next-line no-undef
-  it("it should GET /api/users", done => {
-    chai
-      .request(server)
-      .get(`/api/users?page=1&per=5&sort=true`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body[0].should.have.property("login");
-        server.close();
-        done();
-      });
-  });
-});
+// // eslint-disable-next-line no-undef
+// describe("---Test users route---", () => {
+//   // eslint-disable-next-line no-undef
+//   it("it should GET /api/users/:id ", done => {
+//     const user = { id: 1 };
+//     chai
+//       .request(server)
+//       .get(`/api/users/${user.id}`)
+//       .end((err, res) => {
+//         res.should.have.status(200);
+//         res.body.should.have.property("login");
+//         server.close();
+//         done();
+//       });
+//   });
+//   // eslint-disable-next-line no-undef
+//   it("it should GET /api/users", done => {
+//     chai
+//       .request(server)
+//       .get(`/api/users?page=1&per=5&sort=true`)
+//       .end((err, res) => {
+//         res.should.have.status(200);
+//         res.body[0].should.have.property("login");
+//         server.close();
+//         done();
+//       });
+//   });
+// });

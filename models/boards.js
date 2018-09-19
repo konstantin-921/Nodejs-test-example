@@ -17,11 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Boards.associate = db => {
+    Boards.belongsTo(db.Users, { foreignKey: "users_id" });
     Boards.hasMany(db.Columns, { foreignKey: "boards_id" });
     Boards.belongsToMany(db.Users, {
       through: db.Shares,
       foreignKey: "boards_id",
-      as: "shares"
+      as: "Share"
     });
   };
   return Boards;
