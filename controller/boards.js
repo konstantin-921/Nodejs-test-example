@@ -1,4 +1,4 @@
-import models from "../models/index";
+import models from '../models/index';
 
 const { Op, where, col } = models.sequelize;
 
@@ -22,29 +22,43 @@ function addBoard(req, res, next) {
 }
 
 function getBoards(req, res, next) {
-  models.Boards.findAll({
-    // where: {
-    //   users_id: req.query.id
-    // },
-    raw: true,
-    include: [
-      {
-        as: "Share",
-        model: models.Users,
-        where: {
-          users_id: [where(col("user_id"), req.query.id)]
-        }
-      }
-    ]
+  const id = Number(req.query.id);
+  // models.Boards.findAll({
+  //   where: {
+  //     users_id: req.query.id
+  //   },
+  //   raw: true,
+  //   include: [
+  //     {
+  //       as: 'Share',
+  //       model: models.Users
+  //       // where: {
+  //       //   '$Share.Shares.boards_id$': req.query.id
+  //       // }
+  //     }
+  //   ]
+  // })
+  models.Shares.findAll({
+    attributes: ['boards_id'],
+    where: {
+      users_id: id
+    },
+    raw: true
   })
     .then(boards => {
-      console.log("====================================");
-      console.log(boards);
-      console.log("====================================");
-      // console.log("====================================");
-      // console.log(boards[0]["Share.Shares.boards_id"]);
-      // console.log("====================================");
-      res.status(200).send(boards);
+      const data = boards.map(elem => elem.boards_id);
+      const currentData = [...data, id];
+      return models.Boards.findAll({
+        where: {
+          id: {
+            [Op.in]: currentData
+          }
+        },
+        raw: true
+      });
+    })
+    .then(response => {
+      res.status(200).send(response);
     })
     .catch(error => {
       next(error);

@@ -1,51 +1,51 @@
-import chai from "chai";
-import chaiHttp from "chai-http";
-import server from "../app";
-import models from "../models/index";
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import server from '../app';
+import models from '../models/index';
 
 const should = chai.should();
 
 chai.use(chaiHttp);
 
-process.env.NODE_ENV = "test";
+process.env.NODE_ENV = 'test';
 
 // eslint-disable-next-line no-undef
-describe("---Test users route---", () => {
+describe('---Test users route---', () => {
   // eslint-disable-next-line no-undef
   beforeEach(done => {
     models.sequelize
       .sync({ force: true })
       .then(async () => {
         await models.Users.create({
-          login: "bob",
-          password: "1",
-          email: "fbenbe",
+          login: 'bob',
+          password: '1',
+          email: 'fbenbe',
           createdAt: Date.now(),
           updatedAt: Date.now()
         });
         await models.Users.create({
-          login: "pol",
-          password: "1",
-          email: "fbss",
+          login: 'pol',
+          password: '1',
+          email: 'fbss',
           createdAt: Date.now(),
           updatedAt: Date.now()
         });
         await models.Boards.create({
-          title: "Board 56",
+          title: 'Board 56',
           users_id: 1,
           share: false,
           createdAt: Date.now(),
           updatedAt: Date.now()
         });
         await models.Boards.create({
-          title: "Board 78",
+          title: 'Board 78',
           users_id: 2,
           share: false,
           createdAt: Date.now(),
           updatedAt: Date.now()
         });
         await models.Boards.create({
-          title: "Board 100",
+          title: 'Board 100',
           users_id: 2,
           share: false,
           createdAt: Date.now(),
@@ -57,6 +57,12 @@ describe("---Test users route---", () => {
           createdAt: Date.now(),
           updatedAt: Date.now()
         });
+        await models.Shares.create({
+          users_id: 1,
+          boards_id: 2,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        });
         done();
       })
       .catch(error => {
@@ -64,7 +70,7 @@ describe("---Test users route---", () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it("it should GET /api/boards", done => {
+  it('it should GET /api/boards', done => {
     chai
       .request(server)
       .get(`/api/boards?id=1`)
@@ -76,9 +82,9 @@ describe("---Test users route---", () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it("it should POST /api/boards", done => {
+  it('it should POST /api/boards', done => {
     const board = {
-      title: "Board 1",
+      title: 'Board 1',
       users_id: 1,
       share: false,
       createdAt: Date.now(),
@@ -90,7 +96,7 @@ describe("---Test users route---", () => {
       .send(board)
       .end((err, res) => {
         res.should.have.status(201);
-        res.body.should.have.property("message");
+        res.body.should.have.property('message');
         server.close();
         done();
       });
