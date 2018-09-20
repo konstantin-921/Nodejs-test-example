@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable("Tasks", {
+    queryInterface.createTable('Tasks', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,13 +9,12 @@ module.exports = {
       },
       title: Sequelize.STRING,
       content: Sequelize.STRING,
-      status: Sequelize.STRING,
       position: Sequelize.INTEGER,
       columns_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Columns",
-          key: "id"
+          model: 'Columns',
+          key: 'id'
         }
       },
       createdAt: {
@@ -27,5 +26,5 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  down: queryInterface => queryInterface.dropTable("Tasks")
+  down: queryInterface => queryInterface.dropTable('Tasks')
 };

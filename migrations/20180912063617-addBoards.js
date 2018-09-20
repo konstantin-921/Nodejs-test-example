@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable("Boards", {
+    queryInterface.createTable('Boards', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,14 +10,14 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      users_id: {
+      owner: {
         type: Sequelize.INTEGER,
         references: {
-          model: "Users",
-          key: "id"
+          model: 'Users',
+          key: 'id'
         }
       },
-      share: {
+      owned: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {
@@ -29,5 +29,5 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  down: queryInterface => queryInterface.dropTable("Boards")
+  down: queryInterface => queryInterface.dropTable('Boards')
 };

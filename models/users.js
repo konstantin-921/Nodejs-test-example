@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
-    "Users",
+    'Users',
     {
       login: {
         type: DataTypes.STRING,
@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Users.associate = db => {
-    Users.hasMany(db.Boards, { foreignKey: "users_id" });
+    Users.hasMany(db.Boards, { foreignKey: 'owner' });
     Users.belongsToMany(db.Boards, {
       through: db.Shares,
-      foreignKey: "users_id",
-      as: "Share"
+      foreignKey: 'users_id',
+      as: 'share'
     });
   };
   return Users;

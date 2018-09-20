@@ -1,28 +1,32 @@
-import models from "./index";
+import models from './index';
 
 module.exports = (sequelize, DataTypes) => {
   const Boards = sequelize.define(
-    "Boards",
+    'Boards',
     {
       title: {
         type: DataTypes.STRING
       },
-      users_id: {
+      owner: {
         type: DataTypes.INTEGER
       },
-      share: {
+      owned: {
         type: DataTypes.BOOLEAN
       }
     },
     {}
   );
   Boards.associate = db => {
-    Boards.belongsTo(db.Users, { foreignKey: "users_id" });
-    Boards.hasMany(db.Columns, { foreignKey: "boards_id" });
+    Boards.belongsTo(db.Users, { foreignKey: 'owner' });
+    Boards.hasMany(db.Columns, {
+      foreignKey: 'boards_id'
+      // onDelete: 'cascade',
+      // hooks: true
+    });
     Boards.belongsToMany(db.Users, {
       through: db.Shares,
-      foreignKey: "boards_id",
-      as: "Share"
+      foreignKey: 'boards_id',
+      as: 'share'
     });
   };
   return Boards;

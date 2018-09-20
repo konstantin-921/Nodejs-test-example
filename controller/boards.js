@@ -5,9 +5,8 @@ const { Op, where, col } = models.sequelize;
 function addBoard(req, res, next) {
   models.Boards.create({
     title: req.body.title,
-    share: req.body.share,
+    owned: req.body.owned,
     owner: req.body.owner,
-    user_id: req.body.user_id,
     createdAt: Date.now(),
     updatedAt: Date.now()
   })
@@ -21,48 +20,78 @@ function addBoard(req, res, next) {
     });
 }
 
-function getBoards(req, res, next) {
-  const id = Number(req.query.id);
-  // models.Boards.findAll({
-  //   where: {
-  //     users_id: req.query.id
-  //   },
-  //   raw: true,
-  //   include: [
-  //     {
-  //       as: 'Share',
-  //       model: models.Users
-  //       // where: {
-  //       //   '$Share.Shares.boards_id$': req.query.id
-  //       // }
-  //     }
-  //   ]
-  // })
-  models.Shares.findAll({
-    attributes: ['boards_id'],
-    where: {
-      users_id: id
-    },
-    raw: true
-  })
-    .then(boards => {
-      const data = boards.map(elem => elem.boards_id);
-      const currentData = [...data, id];
-      return models.Boards.findAll({
-        where: {
-          id: {
-            [Op.in]: currentData
-          }
-        },
-        raw: true
-      });
-    })
-    .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      next(error);
+async function deleteBoard(req, res, next) {
+  try {
+    await models.Boards.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(board => {
+      board.destroy();
     });
+    res.status(200).send({
+      message: `Successful delete!`
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-export { getBoards, addBoard };
+async function getOneBoard(req, res, next) {
+  try {
+    const data = await models.Boards.findOne({
+      where: {
+        id: req.params.id
+      },
+      attributes: ['id', 'title', 'owner'],
+      raw: true
+    });
+    res.status(200).send({
+      message: 'success',
+      data
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getBoards(req, res, next) {
+  try {
+    let offset;
+    const PAGE = 1;
+    const PER = 5;
+    const { page, per, sort } = req.query;
+    if (page && per) {
+      offset = +page * +per - +per;
+    } else {
+      offset = +PAGE * +PER - +PER;
+    }
+    const data = await models.Boards.findAll({
+      offset,
+      limit: per || PER,
+      subQuery: false,
+      attributes: ['title', 'owner', 'id'],
+      where: {
+        [Op.or]: [
+          where(col('owner'), req.query.id),
+          where(col('users_id'), req.query.id)
+        ]
+      },
+      include: {
+        as: 'share',
+        model: models.Users,
+        attributes: ['id']
+      },
+      raw: true,
+      required: false
+    });
+    res.status(200).send({
+      message: 'success',
+      data
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export { getOneBoard, getBoards, addBoard, deleteBoard };

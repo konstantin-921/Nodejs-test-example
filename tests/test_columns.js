@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 process.env.NODE_ENV = 'test';
 
 // eslint-disable-next-line no-undef
-describe('---Test boards route---', () => {
+describe('---Test columns route---', () => {
   // eslint-disable-next-line no-undef
   beforeEach(done => {
     models.sequelize
@@ -21,43 +21,18 @@ describe('---Test boards route---', () => {
           password: '1',
           email: 'fbenbe'
         });
-        await models.Users.create({
-          login: 'pol',
-          password: '1',
-          email: 'fbss'
-        });
         await models.Boards.create({
           title: 'Board 56',
           owner: 1,
           owned: false
         });
-        await models.Boards.create({
-          title: 'Board 78',
-          owner: 2,
-          owned: false
-        });
-        await models.Boards.create({
-          title: 'Board 100',
-          owner: 2,
-          owned: false
-        });
         await models.Columns.create({
-          name: 'Column for cascad delete',
+          name: 'Column 1',
           boards_id: 1
         });
-        await models.Tasks.create({
-          title: 'Task for cascad delete',
-          content: 'AbraKadabra',
-          position: 1,
-          columns_id: 1
-        });
-        await models.Shares.create({
-          users_id: 1,
-          boards_id: 3
-        });
-        await models.Shares.create({
-          users_id: 1,
-          boards_id: 2
+        await models.Columns.create({
+          name: 'Column 2',
+          boards_id: 1
         });
         done();
       })
@@ -66,10 +41,11 @@ describe('---Test boards route---', () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it('it should GET /api/boards', done => {
+  it('it should GET /api/columns', done => {
+    const boardId = 1;
     chai
       .request(server)
-      .get(`/api/boards?id=1&page=1&per=5&sort=true`)
+      .get(`/api/columns/${boardId}`)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('message');
@@ -78,31 +54,15 @@ describe('---Test boards route---', () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it('it should GET /api/boards/:id', done => {
-    const id = 1;
-    chai
-      .request(server)
-      .get(`/api/boards/${id}`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.data.should.have.property('id');
-        server.close();
-        done();
-      });
-  });
-  // eslint-disable-next-line no-undef
-  it('it should POST /api/boards', done => {
-    const board = {
-      title: 'Board 1',
-      owner: 1,
-      owned: false,
-      createdAt: Date.now(),
-      updatedAt: Date.now()
+  it('it should POST /api/columns', done => {
+    const column = {
+      name: 'Column 123',
+      boards_id: 1
     };
     chai
       .request(server)
-      .post(`/api/boards`)
-      .send(board)
+      .post(`/api/columns`)
+      .send(column)
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.have.property('message');
@@ -111,11 +71,11 @@ describe('---Test boards route---', () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it('it should DELETE /api/boards/:id', done => {
+  it('it should DELETE /api/columns/:id', done => {
     const id = 1;
     chai
       .request(server)
-      .delete(`/api/boards/${id}`)
+      .delete(`/api/columns/${id}`)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.have.property('message');
