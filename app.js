@@ -7,10 +7,9 @@ import users from './route/users';
 import boards from './route/boards';
 import columns from './route/columns';
 import tasks from './route/tasks';
+// import verifytoken from './services/verifytoken';
 
 const app = express();
-
-// const verifytoken = require('./services/verifytoken');
 
 app.use(cors());
 // app.use(verifytoken);

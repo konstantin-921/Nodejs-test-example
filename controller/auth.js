@@ -1,30 +1,31 @@
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import models from "../models/index";
-import strategy from "../services/strategy";
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import models from '../models/index';
+import strategy from '../services/strategy';
 
 function login(req, res, next) {
   models.Users.findOne({
     where: {
-      login: req.query.login
-    }
+      email: req.query.email
+    },
+    raw: true
   })
     .then(users => {
       const user = users;
       const hash = bcrypt.compareSync(req.query.password, user.password);
       if (hash && user.login === req.query.login) {
         const payload = { user: user.id };
-        const token = jwt.sign(payload, "tasmanianDevil", {
-          expiresIn: "7d"
+        const token = jwt.sign(payload, 'tasmanianDevil', {
+          expiresIn: '7d'
         });
-        res.status(200).send({ message: "ok", token, userId: user.id });
+        res.status(200).send({ message: 'ok', token, userId: user.email });
       } else {
-        res.status(401).send({ error: { message: "Password is incorrect" } });
+        res.status(401).send({ error: { message: 'Password is incorrect' } });
       }
     })
     .catch(error => {
       error.status = 403;
-      error.message = "This user does not exist";
+      error.message = 'This user does not exist';
       next(error);
     });
 }
@@ -36,20 +37,24 @@ function addUser(req, res, next) {
   req.body.password = passwordToSave;
 
   models.Users.findOne({
-    where: { login: req.body.login }
+    where: { email: req.body.email }
   })
     .then(users => {
       if (!users) {
         models.Users.create({
-          login: req.body.login,
           password: req.body.password,
           email: req.body.email,
           createdAt: Date.now(),
           updatedAt: Date.now()
         })
-          .then(() => {
+          .then(user => {
+            const payload = { user: user.id };
+            const token = jwt.sign(payload, 'tasmanianDevil', {
+              expiresIn: '7d'
+            });
             res.status(201).json({
-              message: `User ${req.body.login} successful registration!`
+              message: `User ${req.body.email} successful registration!`,
+              token
             });
           })
           .catch(error => {
@@ -58,7 +63,7 @@ function addUser(req, res, next) {
       } else {
         res
           .status(409)
-          .json({ message: `User ${req.body.login} already exists` });
+          .json({ message: `User ${req.body.email} already exists` });
       }
     })
     .catch(error => {
@@ -68,7 +73,7 @@ function addUser(req, res, next) {
 
 function secret(req, res, next) {
   try {
-    res.json({ message: "Success! You can not see this without a token" });
+    res.json({ message: 'Success! You can not see this without a token' });
   } catch (error) {
     next(error);
   }
