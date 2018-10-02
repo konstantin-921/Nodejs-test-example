@@ -20,12 +20,11 @@ function login(req, res, next) {
         });
         res.status(200).send({ message: 'ok', token, userId: user.email });
       } else {
-        res.status(401).send({ error: { message: 'Password is incorrect' } });
+        res.status(403).send({ message: 'Password is incorrect' });
       }
     })
     .catch(error => {
-      error.status = 403;
-      error.message = 'This user does not exist';
+      res.status(401).send({ message: 'This user does not exist' });
       next(error);
     });
 }
