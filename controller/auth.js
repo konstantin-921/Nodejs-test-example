@@ -18,7 +18,7 @@ function login(req, res, next) {
         const token = jwt.sign(payload, 'tasmanianDevil', {
           expiresIn: '7d'
         });
-        res.status(200).send({ message: 'ok', token, userId: user.email });
+        res.status(200).send({ message: 'ok', token, language: user.language });
       } else {
         res.status(403).send({ message: 'Password is incorrect' });
       }
@@ -43,6 +43,7 @@ function addUser(req, res, next) {
         models.Users.create({
           password: req.body.password,
           email: req.body.email,
+          language: req.body.language,
           createdAt: Date.now(),
           updatedAt: Date.now()
         })

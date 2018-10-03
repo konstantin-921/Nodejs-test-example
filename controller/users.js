@@ -3,9 +3,9 @@ import models from "../models/index";
 function oneUser(req, res, next) {
   models.Users.findOne({
     where: {
-      id: req.params.id
+      id: 1
     },
-    attributes: ["id", "login"],
+    attributes: ["id", "email"],
     raw: true
   })
     .then(users => {

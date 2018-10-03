@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/api/users", allUsers);
 
-router.get("/api/users/:id", oneUser);
+router.get("/api/users/currentUser", oneUser);
 
 export default router;
