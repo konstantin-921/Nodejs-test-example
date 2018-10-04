@@ -1,11 +1,14 @@
 import models from "../models/index";
+import extractId from "../services/extractId";
 
-function oneUser(req, res, next) {
+function getUser(req, res, next) {
+  const id = extractId(req);
+  
   models.Users.findOne({
     where: {
-      id: 1
+      id
     },
-    attributes: ["id", "email"],
+    attributes: ["email", "language"],
     raw: true
   })
     .then(users => {
@@ -16,7 +19,7 @@ function oneUser(req, res, next) {
     });
 }
 
-function allUsers(req, res, next) {
+function getAllUsers(req, res, next) {
   let data;
   const PAGE = 1;
   const PER = 5;
@@ -40,4 +43,23 @@ function allUsers(req, res, next) {
     });
 }
 
-export { allUsers, oneUser };
+async function updateLanguage(req, res, next) {
+  try {
+    const id = extractId(req);
+    const user = await models.Users.update({language: req.body.lang},
+      {
+        where: {
+          id
+        },
+    })
+    res.status(200).send({
+      message: 'Success update language',
+    });
+  }
+  catch(error){
+    next(error)
+  }
+
+}
+
+export { getAllUsers, getUser, updateLanguage };

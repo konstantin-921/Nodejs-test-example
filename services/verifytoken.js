@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-module.exports = (req, res, next) => {
+function verifyToken (req, res, next) {
   const auth = req.get('Authorization');
   const path = req.url.substring(0, 16);
   if (auth && path !== '/api/auth/signIn' && path !== '/api/auth/signUp') {
@@ -20,3 +20,5 @@ module.exports = (req, res, next) => {
     next();
   }
 };
+
+export default verifyToken;

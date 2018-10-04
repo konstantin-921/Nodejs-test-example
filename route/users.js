@@ -1,10 +1,12 @@
 import express from "express";
-import { allUsers, oneUser } from "../controller/users";
+import { getAllUsers, getUser, updateLanguage } from "../controller/users";
 
 const router = express.Router();
 
-router.get("/api/users", allUsers);
+router.get("/api/users", getAllUsers);
 
-router.get("/api/users/currentUser", oneUser);
+router.get("/api/users/currentUser", getUser);
+
+router.patch("/api/users/currentUser", updateLanguage);
 
 export default router;
