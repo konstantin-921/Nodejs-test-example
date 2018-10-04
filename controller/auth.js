@@ -35,6 +35,7 @@ function addUser(req, res, next) {
   const passwordToSave = bcrypt.hashSync(passwordFromUser, salt);
   req.body.password = passwordToSave;
 
+  
   models.Users.findOne({
     where: { email: req.body.email }
   })
