@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from '../models/index';
-import strategy from '../services/strategy';
 
 function login(req, res, next) {
   models.Users.findOne({
