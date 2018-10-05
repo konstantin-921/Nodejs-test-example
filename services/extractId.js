@@ -2,8 +2,9 @@ import jwt from 'jsonwebtoken';
 
 function extractId (req) {
     const token = req.get('Authorization');
+    const auth = token.substring(7);
     return jwt.verify(
-      token,
+        auth,
       'tasmanianDevil',
       { ignoreExpiration: false },
       (err, decoded) => {

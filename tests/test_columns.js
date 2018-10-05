@@ -17,9 +17,9 @@ describe('---Test columns route---', () => {
       .sync({ force: true })
       .then(async () => {
         await models.Users.create({
-          login: 'bob',
           password: '1',
-          email: 'fbenbe'
+          email: 'fbenbe',
+          language: 'en'
         });
         await models.Boards.create({
           title: 'Board 56',

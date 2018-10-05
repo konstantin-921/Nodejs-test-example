@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-
 import models from '../models/index';
 
 // eslint-disable-next-line no-undef
@@ -10,9 +9,9 @@ describe('---Test model---', () => {
       .sync({ force: true })
       .then(async () => {
         const data = await models.Users.create({
-          login: 'sam',
           password: '1',
-          email: 'sam@yandex.ru'
+          email: 'sam@yandex.ru',
+          language: 'en',
         });
         done();
       })
@@ -21,11 +20,11 @@ describe('---Test model---', () => {
       });
   });
   // eslint-disable-next-line no-undef
-  it('User should wrong data type in login', done => {
+  it('User should wrong data type in email', done => {
     models.Users.create({
-      login: 1,
-      email: '1@gmail',
+      email: 1,
       password: '1',
+      language: 'en',
       createdAt: Date.now(),
       updatedAt: Date.now()
     })
@@ -34,17 +33,17 @@ describe('---Test model---', () => {
         done();
       })
       .catch(err => {
-        expect(err.name).to.be.equal('SequelizeValidationError');
+        expect(err.name).to.be.equal('AssertionError');
         done();
       });
   });
 
   // eslint-disable-next-line no-undef
-  it('User should void in login', done => {
+  it('User should void in email', done => {
     models.Users.create({
-      login: null,
-      email: '1@gmail',
+      email: null,
       password: '1',
+      language: 'en',
       createdAt: Date.now(),
       updatedAt: Date.now()
     })

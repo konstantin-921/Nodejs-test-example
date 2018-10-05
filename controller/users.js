@@ -20,6 +20,7 @@ function getUser(req, res, next) {
 }
 
 function getAllUsers(req, res, next) {
+  
   let data;
   const PAGE = 1;
   const PER = 5;
@@ -32,7 +33,7 @@ function getAllUsers(req, res, next) {
   models.Users.findAll({
     offset: data,
     limit: per || PER,
-    attributes: ["id", "login"],
+    attributes: ["id", "email"],
     raw: true
   })
     .then(users => {
