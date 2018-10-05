@@ -17,14 +17,14 @@ describe('---Test boards route---', () => {
       .sync({ force: true })
       .then(async () => {
         await models.Users.create({
-          login: 'bob',
           password: '1',
-          email: 'fbenbe'
+          email: 'fbenbe',
+          language: 'en'
         });
         await models.Users.create({
-          login: 'pol',
           password: '1',
-          email: 'fbss'
+          email: 'fbss',
+          language: 'en'
         });
         await models.Boards.create({
           title: 'Board 56',

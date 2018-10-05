@@ -1,18 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import passport from 'passport';
 import auth from './route/auth';
 import users from './route/users';
 import boards from './route/boards';
 import columns from './route/columns';
 import tasks from './route/tasks';
-import verifytoken from './services/verifytoken';
+import passport from './services/strategy';
 
 const app = express();
 
 app.use(cors());
-app.use(verifytoken);
 app.use(passport.initialize());
 app.use(express.static(`${__dirname}/public`));
 app.use(bodyParser.urlencoded({ extended: true }));
