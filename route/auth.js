@@ -13,4 +13,10 @@ router.get("/api/auth/signIn", (req, res, next) => {
   })(req, res, next);
 })
 
+router.get('/api/auth/facebook', (req, res, next) => {
+  passport.authenticate('facebook', (err, user, data) => {
+    res.status(200).send({data});
+  })
+});
+
 export default router;

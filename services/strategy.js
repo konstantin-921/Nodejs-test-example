@@ -1,12 +1,15 @@
 import passport from "passport";
 import passportJWT from "passport-jwt";
 import passportLocal from "passport-local";
+import passportFacebook from 'passport-facebook';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import models from "../models/index";
 
 const LocalStrategy = passportLocal.Strategy;
 const JwtStrategy = passportJWT.Strategy;
+const FacebookStrategy = passportFacebook.Strategy;
+
 const { ExtractJwt } = passportJWT;
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -50,5 +53,39 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'passwor
       next(null, false, { message: 'Data entered incorrectly', status: 401 });
   });
 }));
+
+passport.use(new FacebookStrategy({
+  clientID: 351778732226923,
+  clientSecret: 'a1aa6bee8c58fef61bd1a27b98f21f09',
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
+}, ((accessToken, refreshToken, profile, done) => {
+    console.log(profile);
+    const user = {
+			email: profile.emails[0].value,
+		};
+  models.User.findOne({
+    where: {
+      email: user.email,
+    }})
+    .then(response => {
+      if(!response) {
+        models.Users.create({
+          password: null,
+          email: user.email,
+          language: 'en',
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        })
+      }
+    })
+  })
+))
+    
+    
+    
+  //   if (err) { return done(err); }
+  //   done(null, user);
+  // });
+
 
 export default passport;
